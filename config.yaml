@@ -1,7 +1,7 @@
 baseURL: "https://hugo-profile.netlify.app"
 languageCode: "en-us"
 title: "Hugo Profile"
-#theme: hugo-profile
+# theme: hugo-profile
 
 outputs:
   home:
@@ -21,6 +21,7 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+
 Menus:
   main:
     - identifier: blog
@@ -127,9 +128,9 @@ params:
   hero:
     enable: true
     intro: "Hi, my name is"
-    title: "Hiba Toujjint."
-    subtitle: "I want to build things for the web"
-    content: "First-year applied computer science student exploring web development and modern web technologies to build functional and visually appealing websites."
+    title: "Isabella."
+    subtitle: "I build things for the web"
+    content: "A passionate web app developer. I tend to make use of modern web technologies to build websites that look great, feel fantastic, and function correctly."
     image: /images/hero.svg
     bottomImage:
       enable: true
@@ -156,20 +157,23 @@ params:
     title: "About Me"
     image: "/images/me.png"
     content: |-
-      I am currently a first-year student in applied computer science at [University Mohammed 6 Polytechnic](um6p.ma) in Bengurir, Morocco.
+      I am a software developer with a passion for web development. I have a background in computer science and mathematics, and I have a strong interest in the intersection of technology and art. I am currently working as a software developer at [example org.](https://example.com) in San Francisco, CA.
 
-
-      
+      I am currently working on a project that will be used to help people find the best way to get around the city.
     skills:
       enable: true
       title: "Here are a few technologies I've been working with recently:"
       items:
-        - "Python"
-
+        - "HTML"
+        - "CSS"
+        - "JavaScript"
+        - "React"
+        - "Node"
+        - "Express"
 
   # Experience
   experience:
-    enable: false
+    enable: true
     # title: "Custom Name"
     items:
       - job: "Senior Software Developer"
@@ -268,10 +272,9 @@ params:
           url: "https://example.com"
       - title: "High School"
         school:
-          name: "Massira Al Khadra."
+          name: "Thomas Jefferson High School for Science and Technology."
           url: "https://example.org"
         GPA: "4.2 out of 5.0"
-        # content: Graduated with a score of 17/20 in the Moroccan grading system.
         featuredLink:
           enable: true
           url: "https://example.com"
