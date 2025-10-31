@@ -111,33 +111,47 @@ body {
 }
 /* ABOUT SECTION */
 .about {
-  background: linear-gradient(180deg, #1e2a44 0%, #f4f5f7 100%);
+  background: linear-gradient(180deg, #1E1D33 0%, #242e4d 100%);
   padding: 100px 10%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  animation: fadeIn 1.8s ease-in-out;
 }
 
 .about-container {
-  background-color: #ffffff;
-  color: #333;
-  padding: 40px;
-  max-width: 800px;
+  background-color: rgba(255, 255, 255, 0.05); /* transparent card */
+  color: #ffffff;
+  padding: 50px;
+  max-width: 850px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  animation: fadeIn 1.6s ease;
+  box-shadow: 0 0 25px rgba(217, 185, 124, 0.2); /* subtle gold glow */
+  backdrop-filter: blur(10px); /* frosted effect */
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.about-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px rgba(217, 185, 124, 0.4);
 }
 
 .about h2 {
-  color: #1e2a44;
+  color: #d9b97c; /* gold title */
   text-align: center;
   margin-bottom: 25px;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
 }
 
 .about p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: #444;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e0e0e0;
   margin-bottom: 15px;
+  animation: slideUp 1.4s ease;
 }
 
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
