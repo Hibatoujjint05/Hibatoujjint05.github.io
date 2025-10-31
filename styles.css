@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f5f7;
+  color: #333;
+  text-align: center;
+  padding-top: 80px;
+  margin: 0;
+}
+
+/* Heading style */
+h1 {
+  color: #1e2a44; /* Navy tone from your outfit */
+  font-size: 2.8rem;
+  animation: fadeIn 2s ease;
+}
+
+/* Paragraph style */
+p {
+  color: #6b7280;
+  font-size: 1.2rem;
+  animation: slideUp 2s ease;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
