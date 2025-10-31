@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
@@ -9,13 +9,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CardProject from "../components/CardProject";
 import TechStackIcon from "../components/TechStackIcon";
-import Certificate from "../components/Certificate";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Code, Award, Boxes } from "lucide-react";
-
-// Optional: if you don’t have Supabase yet, comment this line out
-// import { supabase } from "../supabase";
+import { Code, Boxes } from "lucide-react"; // removed Award icon for now
 
 const ToggleButton = ({ onClick, isShowingMore }) => (
   <button
@@ -77,8 +73,19 @@ function TabPanel({ children, value, index, ...other }) {
     </div>
   );
 }
-TabPanel.propTypes = { children: PropTypes.node, index: PropTypes.number.isRequired, value: PropTypes.number.isRequired };
-function a11yProps(index) { return { id: `full-width-tab-${index}`, "aria-controls": `full-width-tabpanel-${index}` }; }
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
 
 const techStacks = [
   { icon: "python.svg", language: "Python" },
@@ -97,7 +104,6 @@ export default function Portfolio() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const [showAllCertificates, setShowAllCertificates] = useState(false);
 
   const [projects, setProjects] = useState([
     {
@@ -118,11 +124,6 @@ export default function Portfolio() {
     },
   ]);
 
-  const [certificates, setCertificates] = useState([
-    { id: 1, Img: "/images/cert1.png" },
-    { id: 2, Img: "/images/cert2.png" },
-  ]);
-
   const initialItems = window.innerWidth < 768 ? 4 : 6;
 
   useEffect(() => {
@@ -130,17 +131,11 @@ export default function Portfolio() {
   }, []);
 
   const handleChange = (event, newValue) => setValue(newValue);
-  const toggleShowMore = (type) =>
-    type === "projects"
-      ? setShowAllProjects((prev) => !prev)
-      : setShowAllCertificates((prev) => !prev);
+  const toggleShowMore = () => setShowAllProjects((prev) => !prev);
 
   const displayedProjects = showAllProjects
     ? projects
     : projects.slice(0, initialItems);
-  const displayedCertificates = showAllCertificates
-    ? certificates
-    : certificates.slice(0, initialItems);
 
   return (
     <div
@@ -153,8 +148,8 @@ export default function Portfolio() {
           My Projects & Skills
         </h2>
         <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base mt-2">
-          A glimpse into what I’ve built, achieved, and learned along my
-          journey as a computer science student.
+          A glimpse into what I’ve built and learned along my journey as a
+          computer science student.
         </p>
       </div>
 
@@ -190,8 +185,7 @@ export default function Portfolio() {
                   color: "#fff",
                   background:
                     "linear-gradient(135deg, rgba(217,185,124,0.25), rgba(235,217,169,0.25))",
-                  boxShadow:
-                    "0 4px 15px -3px rgba(217,185,124,0.25)",
+                  boxShadow: "0 4px 15px -3px rgba(217,185,124,0.25)",
                 },
               },
               "& .MuiTabs-indicator": { height: 0 },
@@ -199,8 +193,8 @@ export default function Portfolio() {
             }}
           >
             <Tab icon={<Code />} label="Projects" {...a11yProps(0)} />
-            <Tab icon={<Award />} label="Certificates" {...a11yProps(1)} />
-            <Tab icon={<Boxes />} label="Tech Stack" {...a11yProps(2)} />
+            {/* <Tab icon={<Award />} label="Certificates" {...a11yProps(1)} /> */}
+            <Tab icon={<Boxes />} label="Tech Stack" {...a11yProps(1)} />
           </Tabs>
         </AppBar>
 
@@ -227,28 +221,22 @@ export default function Portfolio() {
             {projects.length > initialItems && (
               <div className="mt-6 w-full flex justify-start">
                 <ToggleButton
-                  onClick={() => toggleShowMore("projects")}
+                  onClick={toggleShowMore}
                   isShowingMore={showAllProjects}
                 />
               </div>
             )}
           </TabPanel>
 
-          {/* Certificates Tab */}
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {displayedCertificates.map((certificate, index) => (
-                  <div key={index} data-aos="fade-up" data-aos-delay={index * 100}>
-                    <Certificate ImgSertif={certificate.Img} />
-                  </div>
-                ))}
-              </div>
+          {/* Certificates Tab - Hidden for now */}
+          {/* <TabPanel value={value} index={1} dir={theme.direction}>
+            <div className="text-center text-gray-500 py-10 italic">
+              Certificates section is hidden for now.
             </div>
-          </TabPanel>
+          </TabPanel> */}
 
           {/* Tech Stack Tab */}
-          <TabPanel value={value} index={2} dir={theme.direction}>
+          <TabPanel value={value} index={1} dir={theme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden pb-[5%]">
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
                 {techStacks.map((stack, index) => (
