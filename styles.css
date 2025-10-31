@@ -1,33 +1,110 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f5f7;
-  color: #333;
-  text-align: center;
-  padding-top: 80px;
+  font-family: 'Inter', sans-serif;
   margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f4f5f7 40%, #dfe4ee 80%);
+  color: #333;
 }
 
-/* Heading style */
-h1 {
-  color: #1e2a44; /* Navy tone from your outfit */
-  font-size: 2.8rem;
-  animation: fadeIn 2s ease;
+/* HERO SECTION */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 60px 10%;
 }
 
-/* Paragraph style */
-p {
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  flex-wrap: wrap;
+}
+
+/* Text area */
+.hero-text {
+  flex: 1;
+  max-width: 600px;
+  animation: fadeIn 1.6s ease;
+}
+
+.hero-text h1 {
+  font-size: 2.6rem;
+  color: #1e2a44;
+}
+
+.hero-text h1 span {
+  color: #d9b97c;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
   color: #6b7280;
-  font-size: 1.2rem;
-  animation: slideUp 2s ease;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background-color: #1e2a44;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #d9b97c;
+  color: #1e2a44;
+}
+
+/* Photo */
+.hero-photo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  animation: slideIn 1.8s ease;
+}
+
+.hero-photo img {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid white;
+  box-shadow: 0 0 25px 8px rgba(217,185,124,0.5); /* golden aura */
+  transition: transform 0.6s ease;
+}
+
+.hero-photo img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px 12px rgba(217,185,124,0.7);
 }
 
 /* Animations */
 @keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes slideUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+  .hero-photo img {
+    width: 200px;
+    height: 200px;
+  }
 }
