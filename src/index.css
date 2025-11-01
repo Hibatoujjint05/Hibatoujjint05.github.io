@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: you can add global styles here */
+body {
+  background-color: #1E1D33; /* your navy color */
+  color: #F5F5F5; /* your offwhite text */
+  font-family: 'Inter', sans-serif;
+}
