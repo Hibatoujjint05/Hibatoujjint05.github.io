@@ -11,32 +11,16 @@ import CardProject from "../components/CardProject";
 import TechStackIcon from "../components/TechStackIcon";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { Code, Boxes } from "lucide-react"; // removed Award icon for now
+import { Code, Boxes } from "lucide-react";
 
 const ToggleButton = ({ onClick, isShowingMore }) => (
   <button
     onClick={onClick}
     className="
-      px-3 py-1.5
-      text-gray-300 
-      hover:text-white 
-      text-sm 
-      font-medium 
-      transition-all 
-      duration-300 
-      flex 
-      items-center 
-      gap-2
-      bg-white/5 
-      hover:bg-white/10
-      rounded-md
-      border 
-      border-white/10
-      hover:border-white/20
-      backdrop-blur-sm
-      group
-      relative
-      overflow-hidden
+      px-3 py-1.5 text-gray-300 hover:text-white text-sm font-medium
+      transition-all duration-300 flex items-center gap-2
+      bg-white/5 hover:bg-white/10 rounded-md border border-white/10
+      hover:border-white/20 backdrop-blur-sm group relative overflow-hidden
     "
   >
     <span className="relative z-10 flex items-center gap-2">
@@ -90,13 +74,13 @@ function a11yProps(index) {
 const techStacks = [
   { icon: "python.svg", language: "Python" },
   { icon: "sql.svg", language: "SQL" },
-  { icon: "reactjs.svg", language: "ReactJS" },
+  { icon: "tkinter.svg", language: "Tkinter" },
+  { icon: "pygame.svg", language: "Pygame" },
   { icon: "tailwind.svg", language: "Tailwind CSS" },
   { icon: "javascript.svg", language: "JavaScript" },
-  { icon: "vite.svg", language: "Vite" },
-  { icon: "nodejs.svg", language: "Node JS" },
-  { icon: "firebase.svg", language: "Firebase" },
+  { icon: "reactjs.svg", language: "ReactJS" },
   { icon: "mui.svg", language: "Material UI" },
+  { icon: "vite.svg", language: "Vite" },
   { icon: "vercel.svg", language: "Vercel" },
 ];
 
@@ -108,17 +92,17 @@ export default function Portfolio() {
   const [projects, setProjects] = useState([
     {
       id: 1,
-      Title: "Hack the System",
+      Title: "Inventory Management System",
       Description:
-        "A Tkinter-based educational hacking game that helps players learn logic and problem-solving through mini challenges.",
-      Img: "/images/hackthesystem.png",
-      Link: "https://github.com/Hibatoujjint05/HackTheSystem",
+        "A Tkinter-based desktop app connected to a MySQL database for managing products, stock entries, and reports with a user-friendly interface.",
+      Img: "/images/inventory.png",
+      Link: "https://github.com/Hibatoujjint05/InventoryManagementSystem",
     },
     {
       id: 2,
       Title: "Scheduler Battle",
       Description:
-        "A two-player Pygame that teaches CPU scheduling algorithms through quizzes and interactive battles.",
+        "An interactive two-player Pygame that teaches CPU scheduling algorithms like FCFS, SJF, and Round Robin through a quiz-style competition.",
       Img: "/images/schedulerbattle.png",
       Link: "https://github.com/Hibatoujjint05/SchedulerBattle",
     },
@@ -148,8 +132,8 @@ export default function Portfolio() {
           My Projects & Skills
         </h2>
         <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base mt-2">
-          A glimpse into what I’ve built and learned along my journey as a
-          computer science student.
+          A glimpse into what I’ve built and learned along my journey as an
+          Applied Computer Science student.
         </p>
       </div>
 
@@ -185,7 +169,8 @@ export default function Portfolio() {
                   color: "#fff",
                   background:
                     "linear-gradient(135deg, rgba(217,185,124,0.25), rgba(235,217,169,0.25))",
-                  boxShadow: "0 4px 15px -3px rgba(217,185,124,0.25)",
+                  boxShadow:
+                    "0 4px 15px -3px rgba(217,185,124,0.25)",
                 },
               },
               "& .MuiTabs-indicator": { height: 0 },
@@ -193,7 +178,6 @@ export default function Portfolio() {
             }}
           >
             <Tab icon={<Code />} label="Projects" {...a11yProps(0)} />
-            {/* <Tab icon={<Award />} label="Certificates" {...a11yProps(1)} /> */}
             <Tab icon={<Boxes />} label="Tech Stack" {...a11yProps(1)} />
           </Tabs>
         </AppBar>
@@ -227,13 +211,6 @@ export default function Portfolio() {
               </div>
             )}
           </TabPanel>
-
-          {/* Certificates Tab - Hidden for now */}
-          {/* <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="text-center text-gray-500 py-10 italic">
-              Certificates section is hidden for now.
-            </div>
-          </TabPanel> */}
 
           {/* Tech Stack Tab */}
           <TabPanel value={value} index={1} dir={theme.direction}>
