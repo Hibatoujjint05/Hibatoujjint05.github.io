@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -89,7 +89,7 @@ export default function Portfolio() {
   const [value, setValue] = useState(0);
   const [showAllProjects, setShowAllProjects] = useState(false);
 
-  const [projects, setProjects] = useState([
+  const [projects] = useState([
     {
       id: 1,
       Title: "Inventory Management System",
@@ -114,7 +114,6 @@ export default function Portfolio() {
     AOS.init({ once: false });
   }, []);
 
-  const handleChange = (event, newValue) => setValue(newValue);
   const toggleShowMore = () => setShowAllProjects((prev) => !prev);
 
   const displayedProjects = showAllProjects
@@ -126,7 +125,6 @@ export default function Portfolio() {
       className="md:px-[10%] px-[5%] w-full mt-[3rem] bg-navy overflow-hidden"
       id="Portfolio"
     >
-      {/* Header */}
       <div className="text-center pb-10" data-aos="fade-up">
         <h2 className="inline-block text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gold to-lightgold">
           My Projects & Skills
@@ -137,7 +135,6 @@ export default function Portfolio() {
         </p>
       </div>
 
-      {/* Tabs */}
       <Box sx={{ width: "100%" }}>
         <AppBar
           position="static"
@@ -151,7 +148,7 @@ export default function Portfolio() {
         >
           <Tabs
             value={value}
-            onChange={handleChange}
+            onChange={(e, newVal) => setValue(newVal)}
             textColor="secondary"
             indicatorColor="secondary"
             variant="fullWidth"
@@ -169,8 +166,7 @@ export default function Portfolio() {
                   color: "#fff",
                   background:
                     "linear-gradient(135deg, rgba(217,185,124,0.25), rgba(235,217,169,0.25))",
-                  boxShadow:
-                    "0 4px 15px -3px rgba(217,185,124,0.25)",
+                  boxShadow: "0 4px 15px -3px rgba(217,185,124,0.25)",
                 },
               },
               "& .MuiTabs-indicator": { height: 0 },
@@ -182,49 +178,64 @@ export default function Portfolio() {
           </Tabs>
         </AppBar>
 
-        <SwipeableViews
-          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-          index={value}
-          onChangeIndex={setValue}
-        >
-          {/* Projects Tab */}
-          <TabPanel value={value} index={0} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
-                {displayedProjects.map((project, index) => (
-                  <div
-                    key={index}
-                    data-aos="fade-up"
-                    data-aos-delay={index * 100}
-                  >
-                    <CardProject {...project} />
-                  </div>
-                ))}
+        {/* Animated tab content */}
+        <AnimatePresence mode="wait">
+          {value === 0 && (
+            <motion.div
+              key="projects"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -40 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="container mx-auto flex justify-center items-center overflow-hidden">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
+                  {displayedProjects.map((project, index) => (
+                    <div
+                      key={index}
+                      data-aos="fade-up"
+                      data-aos-delay={index * 100}
+                    >
+                      <CardProject {...project} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            {projects.length > initialItems && (
-              <div className="mt-6 w-full flex justify-start">
-                <ToggleButton
-                  onClick={toggleShowMore}
-                  isShowingMore={showAllProjects}
-                />
-              </div>
-            )}
-          </TabPanel>
+              {projects.length > initialItems && (
+                <div className="mt-6 w-full flex justify-start">
+                  <ToggleButton
+                    onClick={toggleShowMore}
+                    isShowingMore={showAllProjects}
+                  />
+                </div>
+              )}
+            </motion.div>
+          )}
 
-          {/* Tech Stack Tab */}
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden pb-[5%]">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-                {techStacks.map((stack, index) => (
-                  <div key={index} data-aos="fade-up" data-aos-delay={index * 100}>
-                    <TechStackIcon {...stack} />
-                  </div>
-                ))}
+          {value === 1 && (
+            <motion.div
+              key="tech"
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 40 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="container mx-auto flex justify-center items-center overflow-hidden pb-[5%]">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+                  {techStacks.map((stack, index) => (
+                    <div
+                      key={index}
+                      data-aos="fade-up"
+                      data-aos-delay={index * 100}
+                    >
+                      <TechStackIcon {...stack} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </TabPanel>
-        </SwipeableViews>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Box>
     </div>
   );
