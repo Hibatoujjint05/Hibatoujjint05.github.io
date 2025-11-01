@@ -7,6 +7,7 @@ import Portfolio from "./Pages/Portofolio";
 import Contact from "./Pages/Contact";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import AnimatedBackground from './components/Background';
 
 function App() {
   useEffect(() => {
@@ -15,6 +16,7 @@ function App() {
 
   return (
     <div className="bg-navy text-white font-inter">
+      <AnimatedBackground />
       {/* Navbar fixed at top */}
       <Navbar />
 
